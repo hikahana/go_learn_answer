@@ -1,0 +1,25 @@
+basePath: /
+host: localhost:1323
+info:
+  contact: {}
+  description: go_learn API
+  title: go_learn API
+  version: "1.0"
+paths:
+  /hello-world:
+    get:
+      consumes:
+      - application/json
+      description: checkswagger
+      operationId: hello-world
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: checkswagger
+schemes:
+- http
+swagger: "2.0"
