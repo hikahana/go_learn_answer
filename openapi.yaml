@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  title: Todo API
+  version: "1.0.0"
+servers:
+  - url: https://api.example.com
+paths:
+  /todos:
+    get:
+      summary: 全Todo取得
+      responses:
+        '200':
+          description: Todo一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+    post:
+      summary: Todo 作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTodo'
+      responses:
+        '201':
+          description: 作成されたTodo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+  /todos/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: 特定Todo取得
+      responses:
+        '200':
+          description: Todo取得
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+    put:
+      summary: 特定Todo更新
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTodo'
+      responses:
+        '200':
+          description: 更新されたTodo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+    delete:
+      summary: 特定Todo削除
+      responses:
+        '204':
+          description: 削除成功（本文なし）
+components:
+  schemas:
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        completed:
+          type: boolean
+      required:
+        - id
+        - title
+        - completed
+    NewTodo:
+      type: object
+      properties:
+        title:
+          type: string
+      required:
+        - title
+    UpdateTodo:
+      type: object
+      properties:
+        title:
+          type: string
+        completed:
+          type: boolean
